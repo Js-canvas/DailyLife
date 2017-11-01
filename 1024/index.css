@@ -1,0 +1,69 @@
+.scoreBox{
+	margin:20px;
+	font-size:30px; 
+}
+.btn{
+	width: 100px;
+	height: 40px;
+}
+.box{
+	width: 600px;
+	height: 600px;
+	position: absolute;
+	top:50%;
+	left:50%;
+	transform: translate(-50%, -50%);
+	background: #000;
+	border-radius: 5px;
+}
+.wrap{
+	display: flex;
+	overflow: hidden;
+}
+.cube{
+	flex:1;
+	width: 140px;
+	height: 140px;
+	float:left;
+	margin:5px;
+	border-radius: 10px;
+	text-align: center;
+	font-weight: bold;
+	font:60px/140px '微软雅黑';
+}
+.a{
+	background: #fff;
+}
+.b{
+	background: #cFE4C4;
+}
+.c{
+	background: #FFDAB9;
+}
+.d{
+	background: #FFC125;
+}
+.e{
+	background: #FFB6C1;
+}
+.f{
+	background: #FFA500;
+}
+.g{
+	background: #FF83FA;
+}
+.h{
+	background: #FF7F24;
+}
+.i{
+	background: #FF6A6A;
+}
+.j{
+	background: #FF4040;
+}
+.k{
+	background: #FF1493;
+}
+.l{
+	background: #FF0000;
+}
