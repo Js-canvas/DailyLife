@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="index.css">
+</head>
+<body>
+	<div class="scoreBox"><span>分数：</span><span class="score">0</span></div>
+	<div class="scoreBox">
+		<button class="btn">重新开始</button>
+	</div>
+	<div class="box">
+		<div class="wrap">
+			<div class="cube"></div>
+			<div class="cube"></div>
+			<div class="cube"></div>
+			<div class="cube"></div>
+		</div>
+		<div class="wrap">
+			<div class="cube"></div>
+			<div class="cube"></div>
+			<div class="cube"></div>
+			<div class="cube"></div>
+		</div>
+		<div class="wrap">
+			<div class="cube"></div>
+			<div class="cube"></div>
+			<div class="cube"></div>
+			<div class="cube"></div>
+		</div>
+		<div class="wrap">
+			<div class="cube"></div>
+			<div class="cube"></div>
+			<div class="cube"></div>
+			<div class="cube"></div>
+		</div>		
+	</div>
+</body>
+<script>
+	var arrData = [[],[],[],[]];
+	var score = 0;
+
+	initialArr()
+	function initialArr(){		
+		var num = 0;
+		for(var i=0;i<4;i++){
+			for(var j=0;j<4;j++){
+				num = Math.round(Math.random())*2;
+				arrData[j].push(num);
+			}
+		}
+		renderNum()
+	}
+
+	document.getElementsByClassName('btn')[0].onclick = function(){
+		arrData = [[],[],[],[]]
+		initialArr();
+		score = 0;
+		document.getElementsByClassName('score')[0].innerHTML = score;
+	}
+
+	function move(position,arr){
+		var horArr = [[],[],[],[]];
+		var verArr = [[],[],[],[]];
+		switch(position){
+			case 'up':
+				var count = 0;
+				for(var i=0;i<4;i++){
+					for(var j=0;j<4;j++){
+						if(arr[j][i]!=0){
+							verArr[i].push(arr[j][i]);
+						}
+					}
+					for(var k=0;k<4;k++){
+						if(verArr[i].length<4){
+							verArr[i].push(0)
+						}else{
+							break;
+						}
+					}
+					for(var l=0;l<3;l++){
+						if(verArr[i][l]==verArr[i][l+1]&&horArr[i][l]!=0){
+							count++;
+							verArr[i][l]*=2;
+							verArr[i].push(0)
+							verArr[i].splice(l+1,1);
+							score+=verArr[i][l]	
+							break;
+						}
+					}
+				}
+				for(var o=0;o<4;o++){
+					for(var u=0;u<4;u++){
+						arr[o][u] = verArr[u][o];
+					}
+				}
+				creatNew(count)
+				break;
+
+			case 'down':
+				var count = 0; 
+				for(var i=0;i<4;i++){
+					for(var j=0;j<4;j++){
+						if(arr[j][i]!=0){
+							verArr[i].push(arr[j][i]);
+						}
+					}
+					for(var k=0;k<4;k++){
+						if(verArr[i].length<4){
+							verArr[i].unshift(0)
+						}else{
+							break;
+						}
+					}
+					for(var l=3;l>0;l--){
+						if(verArr[i][l]==verArr[i][l-1]&&horArr[i][l]!=0){
+							count++;
+							verArr[i][l]*=2;
+							verArr[i].unshift(0)
+							verArr[i].splice(l,1);
+							score+=verArr[i][l]			
+							break;
+						}
+					}
+				}
+				for(var o=0;o<4;o++){
+					for(var u=0;u<4;u++){
+						arr[o][u] = verArr[u][o];
+					}
+				}
+				creatNew(count)
+				break;
+
+			case 'left':
+				var count = 0;
+				for(var i=0;i<4;i++){
+					for(var j=0;j<4;j++){
+						if(arr[i][j]!=0){
+							horArr[i].push(arr[i][j]);
+						}
+					}
+					for(var k=0;k<4;k++){
+						if(horArr[i].length<4){
+							horArr[i].push(0)
+						}else{
+							break;
+						}
+					}
+					for(var l=0;l<3;l++){
+						if(horArr[i][l]==horArr[i][l+1]&&horArr[i][l]!=0){
+							count++;
+							horArr[i][l]*=2;
+							horArr[i].push(0)
+							horArr[i].splice(l+1,1);	
+							score+=horArr[i][l]						
+							break;
+						}
+					}
+				}		
+				for(var o=0;o<4;o++){
+					for(var u=0;u<4;u++){
+						arr[o][u] = horArr[o][u];
+					}
+				}	
+				creatNew(count)
+				break;
+
+			case 'right':
+				var count = 0; 
+				for(var i=0;i<4;i++){
+					for(var j=0;j<4;j++){
+						if(arr[i][j]!=0){
+							horArr[i].push(arr[i][j]);
+						}else{
+							horArr[i].unshift(0);
+						}
+					}
+					for(var l=3;l>0;l--){
+						if(horArr[i][l]==horArr[i][l-1]&&horArr[i][l]!=0){
+							count++;
+							horArr[i][l]*=2;
+							horArr[i].unshift(0)
+							horArr[i].splice(l,1);
+							score+=horArr[i][l]	
+							break;
+						}
+					}
+				}
+				for(var o=0;o<4;o++){
+					for(var u=0;u<4;u++){
+						arr[o][u] = horArr[o][u];
+					}
+				}
+				creatNew(count);
+				break;
+
+			default: 
+				break;
+		}
+		document.getElementsByClassName('score')[0].innerHTML = score;
+	}
+
+	function creatNew(count){
+		var newArr = [];
+		for(var i=0;i<4;i++){
+			for(var j=0;j<4;j++){
+				if(arrData[i][j]==0){
+					newArr.push([i,j]);
+				}
+			}
+		}
+		if(count!=0){
+			for(var k=0;k<count;k++){
+				var arrIndex = Math.round(Math.random()*(newArr.length-1));
+				if(arrData[newArr[arrIndex][0]][newArr[arrIndex][1]]==0){
+					arrData[newArr[arrIndex][0]][newArr[arrIndex][1]]+=2
+				}else{
+					arrData[newArr[arrIndex][0]][newArr[arrIndex][1]]*=2
+				}
+			}
+		}			
+	}
+
+	document.onkeydown = function(e){
+		var e = e||window.event;
+		switch (e.keyCode) {
+			case 87:
+				move('up',arrData);
+				renderNum();
+				break;
+
+			case 83:
+				move('down',arrData);
+				renderNum();
+				break;
+
+			case 65:
+				move('left',arrData);
+				renderNum();
+				break;
+
+			case 68:
+				move('right',arrData);
+				renderNum();
+				break;
+
+			default:
+				// statements_def
+				break;
+		}
+	}
+
+	function renderNum(){
+		var cube = document.getElementsByClassName('cube');
+		for(var i=0;i<4;i++){
+			for(var j=0;j<4;j++){
+				if(i==0){
+					cube[j].innerHTML = arrData[i][j];
+				}else if(i==1){
+					cube[j+4].innerHTML = arrData[i][j];
+				}else if(i==2){
+					cube[j+8].innerHTML = arrData[i][j];
+				}else{
+					cube[j+12].innerHTML = arrData[i][j];
+				}		
+			}				
+		}
+		for(var k=0;k<cube.length;k++){
+			switch (parseInt(cube[k].innerHTML)) {
+				case 0:
+					cube[k].className='cube a'
+					break;
+
+				case 2:
+					cube[k].className='cube b'
+					break;
+
+				case 4:
+					cube[k].className='cube c'
+					break;
+
+				case 8:
+					cube[k].className='cube d'
+					break;
+
+				case 16:
+					cube[k].className='cube e'
+					break;
+
+				case 32:
+					cube[k].className='cube f'
+					break;
+
+				case 64:
+					cube[k].className='cube g'
+					break;
+
+				case 128:
+					cube[k].className='cube h'
+					break;
+
+				case 256:
+					cube[k].className='cube i'
+					break;
+
+				case 512:
+					cube[k].className='cube j'
+					break;
+
+				case 1024:
+					cube[k].className='cube k'
+					break;
+
+				case 2048:
+					cube[k].className='cube l'
+					break;
+
+				default:
+					break;
+			}
+		}
+	}
+	
+
+
+
+</script>
+</html>
