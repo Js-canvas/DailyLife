@@ -1,0 +1,9 @@
+.contentBox{
+	padding:10px 24px;
+}
+.content{
+	background: #fff;
+	padding: 24px;
+	margin: 0;
+	min-height: 280px;
+}

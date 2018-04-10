@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="onloadPic">
+        <div class="add">+</div>
+        <input type="file" name="file" class="pic" accept="image/png,image/gif,image/jpg">
+    </div>
+    <div class="showPic">
+        <span class="del">X</span>
+        <img alt="" id="newImage">
+    </div>
+    <button class="btn">点击上传</button>
+</body>
+<script>
+    window.onload = function(){
+        var inp = document.getElementsByClassName('pic')[0];
+        var newImage = document.getElementById('newImage');
+        var btn = document.getElementsByClassName('btn')[0];
+        var showPic = document.getElementsByClassName('showPic')[0];
+        var del = document.getElementsByClassName('del')[0];
+
+
+
+        var data = [];
+        var update = "";
+
+        inp.addEventListener('change', function(e){
+            var file = this.files[0];
+            var reader = new FileReader();
+            if(!/image\/\w+/.test(file.type)){
+                alert("请确保文件为图像类型");
+                return false;
+            }
+            reader.readAsDataURL(file);
+            reader.onload = function(e){
+                newImage.setAttribute("src",this.result);
+                newImage.src=this.result;
+                update = this.result
+            }
+        })
+
+        btn.onclick = function(){
+            if(update==""){
+                alert('请选择图片后上传')
+                return false
+            }else{
+                data.push(update);
+            }
+            setTimeout(function(){                
+                newImage.removeAttribute("src");
+                del.style.display = 'none';
+                alert("上传成功")
+            }, 1000)
+        }
+
+        showPic.onmouseover = function(){
+            if(newImage.src==""){
+                return false
+            }else{
+                del.style.display = 'block';
+            }
+        }
+        showPic.onmouseout = function(){
+            if(newImage.src==""){
+                return false
+            }else{
+                del.style.display = 'none';
+            }
+        }
+        del.onclick = function(){
+            newImage.removeAttribute("src");
+            this.style.display = 'none'
+            update="";
+        }        
+    }
+</script>
+</html>

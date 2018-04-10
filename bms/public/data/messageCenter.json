@@ -1,0 +1,40 @@
+{
+    "siderData":[
+        {
+            "subMenuKey":"sub1",
+            "iconType":"mail",
+            "title":"在线消息",
+            "menuData":[
+                {   
+                    "menuKey":"1",
+                    "menuHref":"#/userOnline",
+                    "menuText":"用户来访"
+                },
+                {
+                    "menuKey":"2",
+                    "menuHref":"#/staffOnline",
+                    "menuText":"内部员工建议"
+                }
+            ]
+           
+        },
+        {
+            "subMenuKey":"sub2",
+            "iconType":"appstore",
+            "title":"热线来电",
+            "menuData":[
+                {   
+                    "menuKey":"3",
+                    "menuHref":"#/",
+                    "menuText":"用户来电"
+                },
+                {
+                    "menuKey":"4",
+                    "menuHref":"#/",
+                    "menuText":"内部员工来电"
+                }
+            ]         
+        }
+    ],
+    "siderTitle":"消息中心"
+}

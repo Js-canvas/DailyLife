@@ -1,0 +1,8 @@
+.inputBox{
+    width: auto;
+    height: auto;
+    margin:1rem;
+}
+.inputBox > input {
+    width:80%;
+}

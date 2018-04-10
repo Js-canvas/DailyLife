@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<link rel="stylesheet" href="style.css">
+<body>
+    <canvas class="wrap"></canvas>
+    <canvas class="playerWrap"></canvas>
+    <button class="addPlayerBtn">创建角色</button>
+    <button class="randomMoveBtn">点击移动</button>
+    <div class="showMoveNum">0</div>
+    <div class="creatPlayer">
+    	<p>
+    		<label for="playerNameInp">玩家昵称:</label>
+    		<input type="text" placeholder="请填写玩家昵称" class="playerNameInp" name="playerNameInp"/>
+    	</p>
+    	<p>
+    		<button class="submitBtn nameBtn">确认</button>
+    		<button class="cancleBtn nameBtn">取消</button>
+    	</p>
+    </div>
+    <div class="buyHome">
+    	<p>是否花费<span class="homeMoney">1000</span>元，购买<span class="homePosition">1</span>号位置房屋</p>
+    	<button class="buyBtn">购买</button>
+    	<button class="nobuyBtn">不购买</button>
+    </div>
+    <div class="playerInfo">
+    	<p>当前是<span class="playerName">1</span>号玩家</p>
+    	<p>资产：<span class="playerMoney">10000</span></p>
+    </div>
+    <div class="payMoneyBox">
+    	<p>您付给<span class="payPlayer">1</span>号玩家，<span class="payMoney">1000</span>元</p>
+    	<button class="payBtn">ok</button>
+    </div>
+    <div class="mask"></div>
+</body>
+<script src="player.js"  type="text/javascript"></script>
+<script src="map.js"  type="text/javascript"></script>
+</html>

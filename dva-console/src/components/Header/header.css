@@ -1,0 +1,46 @@
+.wrap{
+	width: 100%;
+	height: auto;
+	background: #373d41;
+	font-size: 14px;
+}
+.flexWrap{
+	display: flex;
+}
+.aWrap{
+	display: inline-block;
+	width: auto;
+	height: 50px;
+	line-height: 50px;
+	flex:1;
+	text-align: center;
+}
+.aWrap:hover{
+	background: #333;
+	color:#fff;
+}
+.bellA{
+	color:#49a9ee!important;
+	margin-left: 5px;
+}
+.headerA{
+	display: inline-block;
+	padding:5px;
+	border-radius: 3px;
+	color:#000!important;
+	width: 100%;
+}
+.userA{
+	display: inline-block;
+	padding:10px;
+	text-align: center;
+	color:#000!important;
+	border-radius: 3px;
+}
+.headerA:hover , .userA:hover{
+	background: #ddd;
+}
+.userFooter{
+	border-top:1px solid #000;
+	text-align: center;
+}

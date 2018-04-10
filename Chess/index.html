@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="index.css">
+</head>
+<body>
+	<div class="map">
+		<canvas id="chessMap" width="680" height="680"></canvas>
+	</div>
+</body>
+<script>
+	var myCanvas = document.getElementById('chessMap');
+	var ctx = myCanvas.getContext("2d");
+	var chessArr = [];
+
+	drawMap();
+	initialArr();
+
+	function initialArr(){
+		for(var i=0;i<=15;i++){
+			chessArr.push([])
+			for(var j=0;j<=15;j++){
+				chessArr[i].push(0);
+			}
+		}
+	}
+
+	function drawMap(){
+		for(var i=1;i<=16;i++){
+			ctx.strokeStyle = '#000';
+			ctx.moveTo(i*40,40);
+			ctx.lineTo(i*40,640);
+			ctx.moveTo(40,i*40);
+			ctx.lineTo(640,i*40);
+			ctx.stroke();
+		}
+	}
+
+	myCanvas.onclick = function(e){
+		var e = e||window.event;
+		var x = Math.round((e.clientX-myCanvas.offsetLeft)/40)*40;
+		var y = Math.round((e.clientY-myCanvas.offsetTop)/40)*40;
+		if(x==0||y==0||x==680||y==680){
+
+		}else{
+			drawChess(x,y)
+			chessArr[y/40-1][x/40-1]=1;
+			isWin(x/40-1,y/40-1);
+		}		
+	}
+
+	function drawChess(posX,posY){
+		ctx.strokeStyle = '#000';
+		ctx.beginPath();
+		ctx.arc(posX,posY,19,0,2*Math.PI);
+		ctx.fillStyle="#000";
+		ctx.fill();
+		ctx.stroke();
+	}
+
+	function isWin(dotX,dotY){
+		// up down
+		upToDown(dotX,dotY)
+		// left right
+		leftToRight(dotX,dotY)
+		// \
+		leftToDown(dotX,dotY)
+		//  /
+		rightToDown(dotX,dotY)
+	}
+
+	function upToDown(dotX,dotY){
+		var count = 0;
+		var topNum = (dotY-5)>0?(dotY-5):0;
+		var bomNum = (dotY+5)<16?(dotY+5):15;
+		for(var i=topNum;i<bomNum;i++){
+			if(chessArr[i][dotX]==1){
+				count++
+				if(count>=5){
+					console.log('win')
+					break;
+				}
+			}else{
+				count=0;
+			}			
+		}
+	}
+
+	function leftToRight(dotX,dotY){
+		var count = 0;
+		var leftNum = (dotX-5)>0?(dotX-5):0;
+		var rightNum = (dotX+5)<16?(dotX+5):15;
+		for(var i=leftNum;i<rightNum;i++){
+			if(chessArr[dotY][i]==1){
+				count++
+				if(count>=5){
+					console.log('win')
+					break;
+				}
+			}else{
+				count=0;
+			}			
+		}
+	}
+
+	function leftToDown(dotX,dotY){
+		var count = 0;
+		for(var i=0;i<10;i++){
+			if(dotY-4+i>15||dotY-4+i<0||dotX-4+i>15||dotX-4+i<0){
+				continue;
+			}else if(chessArr[dotY-4+i][dotX-4+i]==1){
+				count++;
+				if(count>=5){
+					console.log('win')
+					break;
+				}
+			}else{
+				count=0;
+			}		
+		}
+	}
+
+	function rightToDown(dotX,dotY){
+		var count = 0;
+		for(var i=0;i<10;i++){			
+			if(dotY-4+i>15||dotY-4+i<0||dotX+4-i>15||dotX+4-i<0){
+				continue;
+			}else if(chessArr[dotY-4+i][dotX+4-i]==1){
+				console.log(dotY-4+i,dotX+4-i)
+				count++;
+				if(count>=5){
+					console.log('win')
+					break;
+				}
+			}else{
+				count=0;
+			}		
+		}
+	}
+
+	function robot(){
+		
+	}
+</script>
+</html>

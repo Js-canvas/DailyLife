@@ -1,0 +1,27 @@
+html,body{
+	width: 100%;
+	height: 100%;
+}
+.box{
+	width: 500px;
+	height: 500px;
+	background: #0f0;
+	position: relative;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+.foods{
+	width: 10px;
+	height: 10px;
+	background: #f00;
+	position: absolute;
+	border-radius: 5px;
+}
+.snake{
+	width: 10px;
+	height: 10px;
+	background: #00f;
+	position: absolute;
+	border-radius: 5px;
+}

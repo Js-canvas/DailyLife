@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="index.css">
+</head>
+<body>
+	<div class="box">
+		<div class="showContent">
+			<img src="./pic/1.jpg" alt="">
+		</div>
+		<canvas id='myCanvas' width="300" height='200'></canvas>
+		<div class="showArea">当前面积：0</div>
+	</div>
+</body>
+<script>
+	window.onload = function(){
+		var cvs = document.getElementById('myCanvas');
+		var showArea = document.getElementsByClassName('showArea')[0];
+		var ctx=cvs.getContext('2d');
+		var flag = false;
+		var dot = {
+			old:[2],
+			new:[2]
+		}
+
+		InitialBg();
+
+		function InitialBg(){
+			ctx.fillStyle='#ccc';
+			ctx.globalCompositeOperation = "destination-over";
+			ctx.beginPath();  
+			ctx.fillRect(0,0,300,200); 
+			ctx.closePath();  
+		}
+
+		function clear(x,y){
+			ctx.globalCompositeOperation = "destination-out"; 
+			ctx.beginPath();
+			ctx.arc(x,y,15,0,Math.PI*2,true);
+			ctx.fill()
+			ctx.closePath();
+		}
+		
+		function toLine(x1,y1,x2,y2){
+			ctx.lineWidth = 30;
+			ctx.beginPath();
+			ctx.lineCap="round";
+			ctx.moveTo(x1,y1);
+			ctx.lineTo(x2,y2);
+			ctx.stroke();
+		}
+
+		cvs.onmousedown = function(e){
+			flag=true;
+			var e = window.event||event;
+			var boxX = document.getElementsByClassName('box')[0].offsetLeft;
+			var boxY = document.getElementsByClassName('box')[0].offsetTop;
+			var canvasLeft = cvs.offsetLeft
+			var canvasTop = cvs.offsetTop
+			var x = e.clientX-boxX-canvasLeft+1;
+			var y = e.clientY-boxY-canvasTop+1;
+			dot.old[0] = x;
+			dot.old[1] = y;
+			clear(x,y)
+		}
+		cvs.onmousemove = function(e){
+			if(flag){
+				var e = window.event||event;
+				var boxX = document.getElementsByClassName('box')[0].offsetLeft;
+				var boxY = document.getElementsByClassName('box')[0].offsetTop;
+				var canvasLeft = cvs.offsetLeft
+				var canvasTop = cvs.offsetTop
+				var x = e.clientX-boxX-canvasLeft+1;
+				var y = e.clientY-boxY-canvasTop+1;
+				dot.new[0] = x;
+				dot.new[1] = y;
+				clear(x,y)
+				toLine(dot.old[0],dot.old[1],dot.new[0],dot.new[1]);
+				dot.old[0] = x;
+				dot.old[1] = y;
+			}
+		}
+		cvs.onmouseover = function(e){
+			var e = window.event||event;
+			var boxX = document.getElementsByClassName('box')[0].offsetLeft;
+			var boxY = document.getElementsByClassName('box')[0].offsetTop;
+			var canvasLeft = cvs.offsetLeft
+			var canvasTop = cvs.offsetTop
+			var x = e.clientX-boxX-canvasLeft+1;
+			var y = e.clientY-boxY-canvasTop+1;
+			dot.old[0] = x;
+			dot.old[1] = y;
+		}
+		document.body.onmouseup = function(e){
+			flag=false;
+		    var data = ctx.getImageData(0,0,300,200).data;  		     
+		    for(var i=0,j=0;i<data.length;i+=4){
+		        if(data[i] && data[i+1] && data[i+2] && data[i+3]){
+		            j++;
+		        }
+		    }
+		    showArea.innerHTML='当前面积:'+Math.floor((data.length/4-j)/(200*300)*100)+'%'
+		    if((data.length/4-j)>=300*200*0.8){
+		        ctx.clearRect(0,0,300,200);
+		        showArea.innerHTML='当前面积:100%'
+		    }
+		}
+
+
+	}
+</script>
+</html>

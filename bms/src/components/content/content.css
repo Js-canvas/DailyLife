@@ -1,0 +1,12 @@
+.contentWrap{
+	width: 100%;
+	height: auto;
+	background: #ccc;
+	padding:15px;
+
+}
+.content{
+	width: auto;
+	height: 2000px;
+	background: #fff;
+}

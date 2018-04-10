@@ -1,0 +1,49 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+html,body{
+    width: 100%;
+    height: 100%;
+}
+ul,ol,li{
+    list-style: none;
+}
+.wrap{
+    width: 820px;
+    height: 125px;
+    margin:50px auto;
+    border:1px solid #000;
+    border-radius: 5px;
+}
+.wrap>ul{
+    overflow: hidden;
+}
+.show_li{
+    float:left;
+    width: 80px;
+    height: 100px;
+    margin:10px;
+    border:1px solid #000;
+    border-radius: 3px;
+    position: relative;
+    overflow: hidden;
+}
+.show_num{
+    width: 100%;
+    height: 100px;
+    position: absolute;
+    left:0;
+    font:80px/100px "微软雅黑";
+    text-align: center;
+}
+.up{
+    top:0;
+}
+.down{
+    top:100px;
+}
+.move{
+    transform:translateY(-100px);
+    transition:transform 1s ease 0s;
+}

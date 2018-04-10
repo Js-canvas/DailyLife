@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <embed src="rect.svg" width="300" height="300" type="image/svg+xml" >
+    <embed src="line.svg" width="300" height="300" type="image/svg+xml" >
+</body>
+<script>
+    window.onload = function(){
+        var newDate = 0;
+        var oldDate = new Date().getTime();
+        console.log(oldDate)
+        function runFun(){
+            newDate = new Date().getTime();
+            console.log(newDate-oldDate)
+        }
+        runFun()
+    }
+</script>
+</html>

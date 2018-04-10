@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+	<div class="box">
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+		<span></span>
+	</div>
+</body>
+	<script>
+		var snakePosition = [[240,200],[230,200],[220,200],[210,200],[200,200]];
+		var foodsPosition = [];
+		var box = document.getElementsByClassName('box')[0];
+		var snakeBody = document.getElementsByTagName('span');
+		var flag = {position:""}
+		creatSnake()
+		creatFood()
+		var timer;
+
+		function creatSnake(){
+			var snakeModel = [[240,200],[230,200],[220,200],[210,200],[200,200]];		
+			for(var i = 0 ;i <snakeModel.length;i++){
+				snakeBody[i].classList.add('snake');
+				snakeBody[i].style.left = snakeModel[i][0]+'px';
+				snakeBody[i].style.top = snakeModel[i][1]+'px';
+			}
+		}
+
+		function creatFood(){		
+			var foods = document.createElement('div'); 
+			foods.classList.add('foods');
+			var foodsX = Math.round(Math.random()*490/10)*10;
+			var foodsY = Math.round(Math.random()*490/10)*10;
+			foods.style.left = foodsX+'px';
+			foods.style.top = foodsY+'px';
+			foodsPosition = [foodsX,foodsY];	
+			box.appendChild(foods);
+		}
+
+		function eatFoods(snakePosX,snakePosY,oldX,oldY){
+			if(foodsPosition[0]==snakePosX&&foodsPosition[1]==snakePosY){
+				box.removeChild(document.getElementsByClassName('foods')[0]);
+				var newSnake = document.createElement('span');
+				newSnake.classList.add('snake');
+				newSnake.style.left = oldX+'px';
+				newSnake.style.top = oldY+'px';
+				box.appendChild(newSnake);
+				snakePosition.push([oldX,oldY])
+				creatFood();
+			}
+		}
+
+		function move(position,number,arr){
+			var xBody,yBody;
+			var x,y;
+			clearInterval(timer);
+			timer = setInterval(function(){
+				var arrLength = arr.length-1;
+				switch (position){
+					case 'left':
+						if(arr[0][0]<=0){
+							alert('gg');
+							clearInterval(timer);
+							break;
+						}else{
+							x = arr[arrLength][0];
+							y = arr[arrLength][1];
+							for(var i = arrLength ;i > 0;i--){
+								xBody = arr[i-1][0];
+								arr[i][0] = xBody;		
+								yBody = arr[i-1][1];
+								arr[i][1] = yBody;			
+								snakeBody[i].style.left =arr[i][0]+'px';
+								snakeBody[i].style.top =arr[i][1]+'px';
+							}
+							arr[0][0]-=number;
+							snakeBody[0].style.left = arr[0][0]+'px';
+							eatFoods(arr[0][0],arr[0][1],x,y)
+						}
+						break;
+
+					case 'right':
+						if(arr[0][0]>=500){
+							alert('gg');
+							clearInterval(timer);
+							break;
+						}else{
+							x = arr[arrLength][0];
+							y = arr[arrLength][1];
+							for(var i = arrLength ;i > 0;i--){
+								xBody = arr[i-1][0];
+								arr[i][0] = xBody;		
+								yBody = arr[i-1][1];
+								arr[i][1] = yBody;			
+								snakeBody[i].style.left =arr[i][0]+'px';
+								snakeBody[i].style.top =arr[i][1]+'px';
+							}
+							arr[0][0]+=number;
+							snakeBody[0].style.left = arr[0][0]+'px';
+							eatFoods(arr[0][0],arr[0][1],x,y)
+						}
+						break;
+
+					case 'up':
+						if(arr[0][1]<=0){
+							alert('gg');
+							clearInterval(timer);
+							break;
+						}else{
+							x = arr[arrLength][0];
+							y = arr[arrLength][1];
+							for(var i = arrLength ;i > 0;i--){
+								xBody = arr[i-1][0];
+								arr[i][0] = xBody;		
+								yBody = arr[i-1][1];
+								arr[i][1] = yBody;			
+								snakeBody[i].style.left =arr[i][0]+'px';
+								snakeBody[i].style.top =arr[i][1]+'px';
+							}
+							arr[0][1]-=number;
+							snakeBody[0].style.top = arr[0][1]+'px';
+							eatFoods(arr[0][0],arr[0][1],x,y)
+						}
+						break;
+
+					case 'down':
+						if(arr[0][1]>=500){
+							alert('gg');
+							clearInterval(timer);
+							break;
+						}else{
+							x = arr[arrLength][0];
+							y = arr[arrLength][1];
+							for(var i = arrLength ;i > 0;i--){
+								xBody = arr[i-1][0];
+								arr[i][0] = xBody;		
+								yBody = arr[i-1][1];
+								arr[i][1] = yBody;			
+								snakeBody[i].style.left =arr[i][0]+'px';
+								snakeBody[i].style.top =arr[i][1]+'px';
+							}
+							arr[0][1]+=number;
+							snakeBody[0].style.top = arr[0][1]+'px';
+							eatFoods(arr[0][0],arr[0][1],x,y)
+						}
+						break;
+
+					default:
+					break;
+				}
+			},100)
+		}
+
+
+		document.onkeydown = function(e){
+			var e = event || window.event;
+			switch (e.keyCode) {
+				case 87:
+					if(flag.position!='up'&&flag.position!='down'){
+						console.log(flag.position!='up'&&flag.position!='down')
+						move('up',10,snakePosition);
+						flag.position='up'
+					}else{
+						break;
+					}
+					break;
+				case 83:
+					if(flag.position!='up'&&flag.position!='down'){
+						move('down',10,snakePosition)
+						flag.position='down'
+					}else{
+						break;
+					}
+					break;
+				case 65:
+					if(flag.position!='left'&&flag.position!='right'){
+						move('left',10,snakePosition)						
+						flag.position='left'
+					}else{
+						break;
+					}
+					break;
+				case 68:
+					if(flag.position!='left'&&flag.position!='right'){
+						move('right',10,snakePosition)						
+						flag.position='right'
+					}else{
+						break;
+					}
+					break;
+				default:
+					// statements_def
+					break;
+			}
+		}
+		
+	</script>
+</html>

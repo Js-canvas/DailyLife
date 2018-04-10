@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dva Demo</title>
+  <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+
+<div id="root"></div>
+
+
+</body>
+<script src="index.js"></script>
+<script type="text/javascript" src="http://www.google.com/jsapi"></script >
+<script type="text/javascript">
+    google.load("language", "1");
+    function initialize()
+    {
+        var text = document.getElementById("text").innerHTML;
+        google.language.detect(text, 
+            function(result)
+            {
+                if(!result.error && result.language)
+                {
+                    google.language.translate(text, result.language, "en", 
+                        function(result)
+                        {
+                            var translated = document.getElementById("root");
+                            if(result.root)
+                            {
+                                translated.innerHTML = result.root;
+                            }
+                        });
+                }
+            });
+    }
+    google.setOnLoadCallback(initialize);
+</script>
+</html>

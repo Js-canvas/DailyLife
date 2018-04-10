@@ -1,0 +1,23 @@
+*{
+    margin:0;
+    padding: 0;
+}
+html,body{
+    height: 100%;
+}
+.wrap{
+    width: 500px;
+    height: 300px;
+    margin:10px auto;
+}
+.img{
+    display: inline-block;
+    width: 500px;
+    height: 300px;
+}
+.cvsBox{
+    width: 500px;
+    height: 300px;
+    border:1px solid #000;
+    margin:10px auto;
+}

@@ -1,0 +1,35 @@
+.wrap{
+	width: 100%;
+	height: 100%;
+	position: relative;
+}
+.headerBox{
+	width: 100%;
+	height: 48px;
+	overflow: hidden;
+}
+.middleArea{
+	width: 100%;
+	height: auto;
+	position: absolute;
+	top:48px;
+	bottom: 48px;
+}
+.siderBox{
+	width: auto;
+	float: left;
+	height: 100%;
+}
+.contentBox{
+	height: 100%;
+	position: absolute;
+	left:240px;
+	right:0;
+	overflow-y: scroll;
+}
+.footerBox{
+	width: 100%;
+	height: 48px;
+	position: absolute;
+	bottom:0;
+}

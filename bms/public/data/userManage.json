@@ -1,0 +1,40 @@
+{
+    "siderData":[
+        {
+            "subMenuKey":"sub1",
+            "iconType":"mail",
+            "title":"用户中心",
+            "menuData":[
+                {   
+                    "menuKey":"1",
+                    "menuHref":"#/userMessage",
+                    "menuText":"用户信息"
+                },
+                {
+                    "menuKey":"2",
+                    "menuHref":"#/userShopRecord",
+                    "menuText":"用户购买记录"
+                }
+            ]
+           
+        },
+        {
+            "subMenuKey":"sub2",
+            "iconType":"appstore",
+            "title":"账号中心",
+            "menuData":[
+                {   
+                    "menuKey":"3",
+                    "menuHref":"#/",
+                    "menuText":"账号管理"
+                },
+                {
+                    "menuKey":"4",
+                    "menuHref":"#/",
+                    "menuText":"权限管理"
+                }
+            ]         
+        }
+    ],
+    "siderTitle":"用户管理"
+}

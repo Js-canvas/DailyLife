@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="./index.css">
+</head>
+<script>
+	window.onload = function(){
+		var headerBox = document.getElementsByClassName('headerBox')[0];
+		var footerBox = document.getElementsByClassName('footerBox')[0];
+		var img = document.getElementsByClassName('proImg');
+		var proName = document.getElementsByClassName('proName')
+		var obj;
+		var loadData = [];
+		
+		getCommon();
+		
+		function getCommon(){
+			var xhr = new XMLHttpRequest(); 
+			xhr.open('get','./data.json',true);
+	     	xhr.onreadystatechange= function() { 
+	           	if(xhr.readyState == 4) {  
+	           		if(xhr.status == 200){
+	           			obj = JSON.parse(xhr.responseText);     	   			
+						headerBox.innerHTML = obj.data.header;
+						footerBox.innerHTML = obj.data.footer;
+						if(!obj.proData.length)return false;
+						for(let i = 0 ;i < obj.proData.length; i++){
+							loadData.push(obj.proData[i]);
+						}
+						offsetPosition()
+						creatJs();
+	           		}
+	           	}  
+	      	}  
+	      	xhr.send();
+		}
+		
+		function creatJs(){
+			var newJs = document.createElement('script');
+			newJs.src = './index.js';
+			document.body.appendChild(newJs)
+		}
+
+		window.onscroll = function(){
+			if(!loadData.length){
+				return false;
+			}else{
+				offsetPosition()
+			}			
+		}
+		
+		function offsetPosition(){
+			var screenWidth = document.body.offsetWidth;
+			if(screenWidth<400){
+				var l = 3 + Math.floor((window.scrollY/180+1));
+				onloadPro(l)
+			}else if(screenWidth>=400&&screenWidth<500){
+				var l = 6 + Math.floor((window.scrollY/180+1))*2;
+				onloadPro(l)
+			}else if(screenWidth>=500&&screenWidth<900){
+				var l = 9 + Math.floor((window.scrollY/180+1))*3;
+				onloadPro(l)
+			}else{
+				var l = 12 + Math.floor((window.scrollY/180+1))*4;
+				onloadPro(l)
+			}
+		}
+		
+		function onloadPro(l){
+			if(l>28){
+				l=28
+			}
+			for(let i = 0 ;i < l;i++){
+				img[i].src = loadData[i].imgSrc;
+				proName[i].innerHTML = loadData[i].proName
+			}
+		}
+		
+		window.onresize = function(){
+			offsetPosition()
+		}
+	
+	}
+</script>
+<body>
+	<div class="headerBox"></div>
+	<div class="content">
+		<div class="proShow">
+			<ul>
+				<li class="listLi">
+					<img class="proImg" src="./pic/defaultImg.jpg" alt="默认图片" />
+					<p>
+						<span>商品名称：</span><span class="proName">aa</span>
+					</p>
+				</li>
+				<li class="listLi">
+					<img class="proImg" src="./pic/defaultImg.jpg" alt="默认图片" />
+					<p>
+						<span>商品名称：</span><span class="proName">aa</span>
+					</p>
+				</li>
+				<li class="listLi">
+					<img class="proImg" src="./pic/defaultImg.jpg" alt="默认图片" />
+					<p>
+						<span>商品名称：</span><span class="proName">aa</span>
+					</p>
+				</li>
+				<li class="listLi">
+					<img class="proImg" src="./pic/defaultImg.jpg" alt="默认图片" />
+					<p>
+						<span>商品名称：</span><span class="proName">aa</span>
+					</p>
+				</li>
+				<li class="listLi">
+					<img class="proImg" src="./pic/defaultImg.jpg" alt="默认图片" />
+					<p>
+						<span>商品名称：</span><span class="proName">aa</span>
+					</p>
+				</li>
+				<li class="listLi">
+					<img class="proImg" src="./pic/defaultImg.jpg" alt="默认图片" />
+					<p>
+						<span>商品名称：</span><span class="proName">aa</span>
+					</p>
+				</li>
+				<li class="listLi">
+					<img class="proImg" src="./pic/defaultImg.jpg" alt="默认图片" />
+					<p>
+						<span>商品名称：</span><span class="proName">aa</span>
+					</p>
+				</li>
+				<li class="listLi">
+					<img class="proImg" src="./pic/defaultImg.jpg" alt="默认图片" />
+					<p>
+						<span>商品名称：</span><span class="proName">aa</span>
+					</p>
+				</li>
+				<li class="listLi">
+					<img class="proImg" src="./pic/defaultImg.jpg" alt="默认图片" />
+					<p>
+						<span>商品名称：</span><span class="proName">aa</span>
+					</p>
+				</li>
+				<li class="listLi">
+					<img class="proImg" src="./pic/defaultImg.jpg" alt="默认图片" />
+					<p>
+						<span>商品名称：</span><span class="proName">aa</span>
+					</p>
+				</li>
+				<li class="listLi">
+					<img class="proImg" src="./pic/defaultImg.jpg" alt="默认图片" />
+					<p>
+						<span>商品名称：</span><span class="proName">aa</span>
+					</p>
+				</li>
+				<li class="listLi">
+					<img class="proImg" src="./pic/defaultImg.jpg" alt="默认图片" />
+					<p>
+						<span>商品名称：</span><span class="proName">aa</span>
+					</p>
+				</li>
+				<li class="listLi">
+					<img class="proImg" src="./pic/defaultImg.jpg" alt="默认图片" />
+					<p>
+						<span>商品名称：</span><span class="proName">aa</span>
+					</p>
+				</li>
+				<li class="listLi">
+					<img class="proImg" src="./pic/defaultImg.jpg" alt="默认图片" />
+					<p>
+						<span>商品名称：</span><span class="proName">aa</span>
+					</p>
+				</li>
+				<li class="listLi">
+					<img class="proImg" src="./pic/defaultImg.jpg" alt="默认图片" />
+					<p>
+						<span>商品名称：</span><span class="proName">aa</span>
+					</p>
+				</li>
+				<li class="listLi">
+					<img class="proImg" src="./pic/defaultImg.jpg" alt="默认图片" />
+					<p>
+						<span>商品名称：</span><span class="proName">aa</span>
+					</p>
+				</li>
+				<li class="listLi">
+					<img class="proImg" src="./pic/defaultImg.jpg" alt="默认图片" />
+					<p>
+						<span>商品名称：</span><span class="proName">aa</span>
+					</p>
+				</li>
+				<li class="listLi">
+					<img class="proImg" src="./pic/defaultImg.jpg" alt="默认图片" />
+					<p>
+						<span>商品名称：</span><span class="proName">aa</span>
+					</p>
+				</li>
+				<li class="listLi">
+					<img class="proImg" src="./pic/defaultImg.jpg" alt="默认图片" />
+					<p>
+						<span>商品名称：</span><span class="proName">aa</span>
+					</p>
+				</li>
+				<li class="listLi">
+					<img class="proImg" src="./pic/defaultImg.jpg" alt="默认图片" />
+					<p>
+						<span>商品名称：</span><span class="proName">aa</span>
+					</p>
+				</li>
+				<li class="listLi">
+					<img class="proImg" src="./pic/defaultImg.jpg" alt="默认图片" />
+					<p>
+						<span>商品名称：</span><span class="proName">aa</span>
+					</p>
+				</li>
+				<li class="listLi">
+					<img class="proImg" src="./pic/defaultImg.jpg" alt="默认图片" />
+					<p>
+						<span>商品名称：</span><span class="proName">aa</span>
+					</p>
+				</li>
+				<li class="listLi">
+					<img class="proImg" src="./pic/defaultImg.jpg" alt="默认图片" />
+					<p>
+						<span>商品名称：</span><span class="proName">aa</span>
+					</p>
+				</li>
+				<li class="listLi">
+					<img class="proImg" src="./pic/defaultImg.jpg" alt="默认图片" />
+					<p>
+						<span>商品名称：</span><span class="proName">aa</span>
+					</p>
+				</li>
+				<li class="listLi">
+					<img class="proImg" src="./pic/defaultImg.jpg" alt="默认图片" />
+					<p>
+						<span>商品名称：</span><span class="proName">aa</span>
+					</p>
+				</li>
+				<li class="listLi">
+					<img class="proImg" src="./pic/defaultImg.jpg" alt="默认图片" />
+					<p>
+						<span>商品名称：</span><span class="proName">aa</span>
+					</p>
+				</li>
+				<li class="listLi">
+					<img class="proImg" src="./pic/defaultImg.jpg" alt="默认图片" />
+					<p>
+						<span>商品名称：</span><span class="proName">aa</span>
+					</p>
+				</li>
+				<li class="listLi">
+					<img class="proImg" src="./pic/defaultImg.jpg" alt="默认图片" />
+					<p>
+						<span>商品名称：</span><span class="proName">aa</span>
+					</p>
+				</li>	
+			</ul>
+		</div>		
+	</div>
+	<div class="footerBox"></div>
+</body>
+
+</html>
