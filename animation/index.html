@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<link rel="stylesheet" href="style.css">
+<body>
+    <button class="addBtn btn">add</button>
+    <button class="removeBtn btn">remove</button>
+    <div id="box"></div>
+</body>
+<script>
+    window.onload = function(){
+        var addBtn = document.getElementsByClassName('addBtn')[0];
+        var removeBtn = document.getElementsByClassName('removeBtn')[0];
+        var box = document.getElementById("box");
+        addBtn.onclick = function(){
+            box.classList.add('change');
+            box.classList.remove("removeCol")
+        }
+        removeBtn.onclick = function(){
+            box.classList.add('removeCol');
+        }
+    }
+</script>
+</html>
