@@ -1,0 +1,37 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+#box{
+    width: 100px;
+    height: 100px;
+    margin:100px auto;
+    background: #f00;
+    border:1px solid #000;
+    border-radius: 50px;
+}
+.btn{
+    width: 80px;
+    height: 40px;
+    margin:50px;
+}
+.change{
+    animation:changeCol 3s ease infinite;
+    animation-play-state:running;
+}
+.removeCol{
+    animation-play-state:paused;
+}
+@keyframes changeCol{
+    0%{}
+    50%{
+        width:200px;
+        height:200px;
+        border-radius: 100px;
+    }
+    100%{
+        width:100px;
+        height:100px;
+        border-radius: 50px;
+    }
+}
