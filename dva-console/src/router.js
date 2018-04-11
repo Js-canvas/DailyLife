@@ -1,22 +1,15 @@
 import React from 'react';
 import { Router, Route } from 'dva/router';
-import IndexPage from './routes/IndexPage';
+import IndexPage from './routes/IndexPage/index';
+import UserInfo from './routes/UserInfo/index';
 
 function RouterConfig({ history }) {
-	const routes = [
-		{
-			path:'/',
-			name:'IndexPage',
-			getComponent(nextState, cb) {
-		        require.ensure([], (require) => {
-		          cb(null, require('./routes/IndexPage'));
-		        });
-		    }
-		}
-	]
-
   return (
-    <Router history={history} routes = {routes} />
+    <Router history={history}>
+      <Route path="/" component={IndexPage} />
+      <Route path="/echart" component={IndexPage} />
+      <Route path="/userinfo" component={UserInfo} />
+    </Router>
   );
 }
 

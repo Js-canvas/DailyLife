@@ -1,0 +1,16 @@
+.siderWrap{
+	width: 240px;
+	height: auto;
+}
+.siderBtn{
+	text-align: center;
+}
+.siderBtn:hover{
+	cursor: pointer;
+}
+.wordShow{
+	display: none;
+}
+.wordHidden{
+	display: inline-block;
+}
