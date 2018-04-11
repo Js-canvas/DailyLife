@@ -1,5 +1,6 @@
 const layout = {
-  collapsibleFlag:false
+  collapsibleFlag:false,
+  menuDefaultKey:['1']
 }
 
 const userInfo = {

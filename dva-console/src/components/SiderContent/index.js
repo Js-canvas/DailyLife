@@ -11,27 +11,21 @@ class SiderContent extends Component{
  		}
 	}
 
-	toggleCollapsed (){
-		this.props.updateState({collapsibleFlag:!this.props.collapsibleFlag})
+	getMenuDefaultKey({ item, key, keyPath }){
+		this.props.updateState({menuDefaultKey:keyPath})
 	}
 
 	render(){
 		const SubMenu = Menu.SubMenu;
-		const { collapsibleFlag } = this.props;
+		const { collapsibleFlag, menuDefaultKey } = this.props;
 		return(
 			<div className={styles.siderWrap}>					
 				<Menu
-					defaultSelectedKeys={['1']}
+					defaultSelectedKeys={menuDefaultKey}
 					mode="inline"
 					theme="dark"
-					inlineCollapsed={collapsibleFlag}
+					onClick={this.getMenuDefaultKey.bind(this)}
 				>
-					<Menu.Item key="0" className={styles.siderBtn} >
-						<div onClick={this.toggleCollapsed.bind(this)}>
-							<Icon type={collapsibleFlag ? 'menu-unfold' : 'menu-fold'}  />
-							<span className={collapsibleFlag ? styles.wordHidden :styles.wordShow}>Change</span>
-						</div>
-					</Menu.Item>
 					<Menu.Item key="1">
 						<Link to="/echart">
 							<Icon type="pie-chart" />

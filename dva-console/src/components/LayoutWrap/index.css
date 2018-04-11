@@ -8,3 +8,9 @@
 	min-height: 280px;
   overflow-y: scroll;
 }
+.triggerNode{
+  background:rgba(0, 0, 0, 0.65);
+  color:#000;
+  font-size: 0.2rem;
+  color:#fff;
+}

@@ -1,5 +1,5 @@
-import React,{Component} from 'react';
-import { Layout } from 'antd';
+import React,{ Component } from 'react';
+import { Layout, Icon } from 'antd';
 import { connect } from 'dva';
 import { NAMESPACE } from '../../models/layout/constants'
 import Header from '../Header'
@@ -32,22 +32,35 @@ class LayoutWrap extends Component{
     this.props.updateState({collapsibleFlag:flag})
 	}
 
+  onCollapse = (collapsed) => {
+    this.props.updateState({collapsibleFlag:collapsed})
+  }
+
+  triggerNode = () => {
+    return (
+      <div className={styles.triggerNode}>
+        <Icon type={this.props.collapsibleFlag ? 'menu-unfold' : 'menu-fold'}  />
+      </div>
+      )
+  }
+
 	render(){
 		const { Content, Sider } = Layout;
     const { collapsibleFlag } = this.props;
+
 		return (
-			<Layout style={{ height:'100%'}}>
+			<Layout style={{ height:'100%',width:'100%'}}>
 				<Header />
 				<Layout>
-      				<Sider width={240} collapsible={true} trigger={null} collapsed={collapsibleFlag}>
-      					<SiderContent changeCollapsible={this.changeCollapsible.bind(this)} {...this.props} />
-      				</Sider>
-      				<Layout className={styles.contentBox}>			       
-	      				<Content className={styles.content}>
-	      					{this.props.children}
-	      				</Content>
-      				</Layout>
-      			</Layout>
+  				<Sider width={240} collapsible onCollapse={this.onCollapse} collapsed={collapsibleFlag} trigger={this.triggerNode()}>
+  					<SiderContent {...this.props} />
+  				</Sider>
+  				<Layout className={styles.contentBox}>			       
+    				<Content className={styles.content}>
+    					{this.props.children}
+    				</Content>
+  				</Layout>
+  			</Layout>
 			</Layout>
 			)
 	}
